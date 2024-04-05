@@ -1,5 +1,7 @@
 package com.green.jdbcex.jdbcex.controller;
 
+import com.green.jdbcex.jdbcex.dto.MemberDTO;
+import com.green.jdbcex.jdbcex.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
@@ -17,6 +19,8 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("login get....");
+        HttpSession session = req.getSession();
+        log.info("새로운 세션 여부 :" + session.isNew());
         req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
 
     }
@@ -30,9 +34,16 @@ public class LoginController extends HttpServlet {
 
         // 로그인 정보를 한꺼번에 정보라는 키값으로 세션에 저장해야함
 
-        String str = mid + mpw;
-        HttpSession session = req.getSession();
-        session.setAttribute("loginInfo", str);
-        resp.sendRedirect("/jdbcex/todo/list");
+        MemberDTO memberDTO = null;
+        try {
+            memberDTO = MemberService.INSTANCE.login(mid, mpw);
+//            String str = mid + mpw;
+            HttpSession session = req.getSession();
+            log.info("새로운 세션 여부 : " + session.isNew());
+            session.setAttribute("loginInfo", memberDTO);
+            resp.sendRedirect("/jdbcex/todo/list");
+        } catch (Exception e) {
+            resp.sendRedirect("/jdbcex/login?result=error");
+        }
     }
 }

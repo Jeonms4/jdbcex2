@@ -19,5 +19,9 @@
         </li>
     </c:forEach>
 </ul>
+
+<form action="/jdbcex/logout" method="post">
+    <button>LOGOUT</button>
+</form>
 </body>
 </html>
