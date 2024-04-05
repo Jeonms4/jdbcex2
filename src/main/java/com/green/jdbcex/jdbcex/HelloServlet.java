@@ -1,4 +1,4 @@
-package com.green.jdbcex;
+package com.green.jdbcex.jdbcex;
 
 import java.io.*;
 import javax.servlet.http.*;

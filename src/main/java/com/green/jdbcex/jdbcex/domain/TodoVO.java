@@ -1,16 +1,23 @@
-package com.green.jdbcex.domain;
+package com.green.jdbcex.jdbcex.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
+
 @Getter
-@ToString
 @Builder
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class TodoVO {
-    private long tno;
+
+    private Long tno;
+
     private String title;
+
     private LocalDate dueDate;
+
     private boolean finished;
+
 }
+
