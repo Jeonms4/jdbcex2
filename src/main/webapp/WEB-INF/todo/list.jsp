@@ -9,6 +9,8 @@
 <body>
 <%--${todoDTOList}--%>
 
+현재의 Application ${  appName}
+
 <ul>
     <c:forEach items="${todoDTOList}" var="dto">
         <li>
